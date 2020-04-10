@@ -1,0 +1,45 @@
+{
+  "name": "tw",
+  "version": "1.0.1",
+  "description": "Search TiddlyWiki",
+  "blocks": {
+    "input": [
+      {
+        "id": "gh",
+        "args": "Optional",
+        "prefix": "gh",
+        "script": "src/index.js",
+        "space": true,
+        "type": "PrefixScript",
+        "connections": ["Open"]
+      },
+      {
+        "id": "gh-reload",
+        "icon": "fa-refresh",
+        "keyword": "reload",
+        "title": "Reload GitHub repos",
+        "type": "Keyword",
+        "connections": ["Reload"]
+      }
+    ],
+    "output": [
+      {
+        "id": "Open",
+        "type": "OpenInBrowser",
+        "url": "{value}"
+      },
+      {
+        "id": "Reload",
+        "type": "UserScript",
+        "script": "src/reload.js",
+        "connections": ["Notify"]
+      },
+      {
+        "id": "Notify",
+        "type": "SendNotification",
+        "title": "GitHub repos reloaded",
+        "message": "The list of repos was updated"
+      }
+    ]
+  }
+}
